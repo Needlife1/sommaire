@@ -62,8 +62,14 @@ export async function generatePdfSummary(
                 }
             }
 
+          return {
+            success: true,
+            message: 'Filed to generate summary',
+            data: {
+              summary,
+            }
+          }
         } catch (error) {
-            console.log('Error fetching or extracting PDF text:', error);
             
             return {
                 success: false,
