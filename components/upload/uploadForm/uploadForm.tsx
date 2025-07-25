@@ -6,10 +6,12 @@ import { fileUploadSchema } from './uploadFormSchema';
 import { toast } from 'sonner';
 import { generatePdfSummary, storePdfSummaryAction } from '@/actions/uploadActions';
 import { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function UploadForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   
   const { startUpload, routeConfig } = useUploadThing('pdfUploader', {
     onClientUploadComplete: () => {
@@ -104,12 +106,15 @@ export default function UploadForm() {
       });
 
       formRef.current?.reset();
+      router.push(`summaries/${storeResult.data.id}`);
     }
   }
     } catch (error) {
       setIsLoading(false);
   console.error('Error occurred', error);
   formRef.current?.reset();
+    } finally {
+      setIsLoading(false);
 }
 
   }
