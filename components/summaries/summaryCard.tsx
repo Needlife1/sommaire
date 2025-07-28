@@ -1,6 +1,10 @@
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
 import DeleteButton from './deleteButton';
+import SummaryHeader from './summaryHeader';
+import StatusBadge from './statusBadge';
+
+
 
 export default function SummaryCard({ summary }: { summary: any }) {
   return (
@@ -11,18 +15,20 @@ export default function SummaryCard({ summary }: { summary: any }) {
         </div>
 
         <Link href={`summaries/${summary.id}`} className="block p-4 sm:p-6">
-          <h3 className="text-base xl:text-lg font-semibold text-gray-900 truncate w-4/5">
-            {summary.title}
-          </h3>
+          <div className='flex flex-col gap-3 sm:gap-4'>
+            <SummaryHeader
+              fileUrl={summary.original_file_url}
+              title={summary.title}
+              createdAt={summary.created_at}
+            />
 
-          <p className="text-gray-600 line-clamp-2 text-sm sm:text-base pl-2">
-            {summary.summary_text}
-          </p>
+            <p className="text-gray-600 line-clamp-2 text-sm sm:text-base pl-2">
+              {summary.summary_text}
+            </p>
 
-          <p className="text-sm text-gray-500">2024</p>
-
-          <div>
-            <span></span>
+            <div className='flex justify-between items-center mt-2 sm:mt-4'>
+              <StatusBadge status={summary.status} />
+            </div>
           </div>
         </Link>
       </Card>

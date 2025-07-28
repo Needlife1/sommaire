@@ -3,18 +3,19 @@ import { ArrowRight, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import BgGradient from '@/components/common/bgGradient';
 import SummaryCard from '@/components/summaries/summaryCard';
+import { getSummaries } from '@/lib/summaries';
+import { currentUser } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const user = await currentUser();
+  const userId = user?.id;
+  if (!userId) return redirect('/sign-in');
+
     const uploadLimit = 5;
-    const summaries = [
-      {
-        id: '1',
-        title: 'Sample Summary 1',
-        created_at: '2025-07-24 05:39:51.128127+00',
-            summary_text: 'description of summary 1',
-        status: 'completed',
-      },
-    ];
+  const summaries = await getSummaries(userId);
+  
+  
   return (
     <main className="min-h-screen">
       <BgGradient className="from-emerald-200 via-teal-200 to-cyan-200" />
