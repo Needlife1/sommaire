@@ -12,10 +12,33 @@ import {
 
 import { Trash2 } from 'lucide-react';
 import { Button } from '../ui/button';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
+import { deleteSummaryAction } from '@/actions/summaryActions';
+import { toast } from 'sonner';
 
-export default function DeleteButton() {
+
+interface DeleteButtonProps {
+  summaryId: string;
+}
+
+export default function DeleteButton({summaryId}: DeleteButtonProps) {
   const [open, setOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const handleDelete = async () => {
+    startTransition(async () => {
+      const result = await deleteSummaryAction({ summaryId });
+      if (!result.success) {
+        toast.error('Error', {
+          description: 'Failed to delete summary.',
+          duration: 2000,
+          position: 'top-center',
+        });
+      }
+      setOpen(false);
+    });
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -40,7 +63,7 @@ export default function DeleteButton() {
             variant={'ghost'}
             size="sm"
             className=" bg-gray-50! border border-gray-200! hover:text-gray-600! hover:bg-gray-100!"
-          onClick={()=> setOpen(false)}
+            onClick={()=> setOpen(false)}
           >
             Cancel
           </Button>
@@ -48,8 +71,9 @@ export default function DeleteButton() {
             variant={'destructive'}
             size="sm"
             className=" bg-gray-900!  hover:bg-gray-600!"
+            onClick={handleDelete}
           >
-            Delete
+            {isPending ? 'Deleting...' : 'Delete'}
           </Button>
         </DialogFooter>
       </DialogContent>

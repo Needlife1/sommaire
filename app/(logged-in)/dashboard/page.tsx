@@ -6,6 +6,7 @@ import SummaryCard from '@/components/summaries/summaryCard';
 import { getSummaries } from '@/lib/summaries';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+import EmptySummaries from '@/components/summaries/emptySummaries';
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -22,7 +23,7 @@ export default async function DashboardPage() {
 
       <div className="container mx-auto flex flex-col gap-4">
         <div className="px-2 py-12 sm:py-24">
-          <div className="flex gap-4 mb-8 justify-between">
+          <div className="flex gap-4 mb-8 justify-between flex-col sm:flex-row">
             <div className="flex flex-col gap-2">
               <h1 className="text-4xl font-bold tracking-tight bg-linear-to-r from-gray-600 to-gray-900 bg-clip-text text-transparent ">
                 Your Summaries
@@ -59,11 +60,13 @@ export default async function DashboardPage() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 sm:px-0">
-            {summaries.map((summary, i) => (
-              <SummaryCard key={i} summary={summary} />
-            ))}
-          </div>
+          {summaries.length === 0 ? <EmptySummaries /> : (
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 sm:px-0">
+              {summaries.map((summary, i) => (
+                <SummaryCard key={i} summary={summary} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </main>
