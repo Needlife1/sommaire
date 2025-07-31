@@ -27,10 +27,17 @@ export function HeaderSummaryPage({title, createdAt, readingTime}: { title: stri
             <Clock className="h-4 w-4 text-rose-400" />
             {readingTime} min read
           </div>
-              </div>
-              <h1></h1>
+        </div>
+        <h1 className="text-2xl lg:text-4xl font-bold lg:tracking-tight">
+          <span
+            className="bg-linear-to-r from-rose-600
+          to-orange-600 bg-clip-text text-transparent"
+          >
+            {title}
+          </span>
+        </h1>
       </div>
-      <div>
+      <div className="self-start">
         <Link href="/dashboard">
           <Button
             variant="link"
