@@ -28,7 +28,8 @@ export default async function DashboardPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="container mx-auto flex flex-col gap-4">
+        className="container mx-auto flex flex-col gap-4"
+      >
         <div className="px-2 py-12 sm:py-24">
           <div className="flex gap-4 mb-8 justify-between flex-col sm:flex-row">
             <div className="flex flex-col gap-2">
@@ -56,7 +57,7 @@ export default async function DashboardPage() {
                 initial="hidden"
                 animate="visible"
                 whileHover={{ scale: 1.05 }}
-                className='self-start'
+                className="self-start"
               >
                 <Button
                   variant="link"
@@ -73,16 +74,17 @@ export default async function DashboardPage() {
 
           {hasReachedLimit && (
             <MotionDiv
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-            className="mb-6">
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              className="mb-6"
+            >
               <div className="bg-rose-50 border border-rose-200 rounded-lg p-4 text-rose-800">
                 <p className="text-sm">
                   You&apos;ve reached the limit of {uploadLimit} uploads on the
                   Basic plan.{' '}
                   <Link
-                    href="/#pricing"
+                    href={{ pathname: '/', hash: 'pricing' }}
                     className="text-rose-800 underline font-medium underline-offset-4 inline-flex items-center"
                   >
                     {' '}
