@@ -23,8 +23,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     images: [
-      // можно относительный путь, т.к. есть metadataBase,
-      // но абсолютный безопаснее:
+     
       `${SITE_URL}/open-graph-image.png`,
     ],
   },

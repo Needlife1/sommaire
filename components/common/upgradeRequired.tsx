@@ -28,7 +28,7 @@ export default function UpgradeRequired() {
             asChild
             className="bg-linear-to-r from-rose-500 to-rose-700 hover:from-rose-600 hover:to-rose-800 text-white"
           >
-            <Link href="/pricing" className="flex gap-2 items-center">
+            <Link href="/#pricing" className="flex gap-2 items-center">
               View Pricing Plans
               <ArrowRight className="w-4 h-4" />
             </Link>
