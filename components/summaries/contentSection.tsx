@@ -1,10 +1,14 @@
 import { parseEmojiPoint, parsePoint } from "@/utils/summary-helpers";
+import { MotionDiv } from "../common/motionWrapper";
+import { containerVariants, itemVariants } from "@/constants/motion";
 
 
 const EmojiPoint = ({ point }: { point: string; }) => {
   const { emoji, text } = parseEmojiPoint(point) ?? {};
   return (
-    <div
+    <MotionDiv
+      variants={itemVariants}
+
       
       className="group relative bg-linear-to-br
             from-gray-200/[0.08] to-gray-400/[0.03] p-4
@@ -19,17 +23,18 @@ const EmojiPoint = ({ point }: { point: string; }) => {
       />
       <div className="relative flex items-start gap-3 pt-1">
         <span className="text-lg lg:text-xl shrink-0">{emoji}</span>
-        <p className="text-lg lg:text-xl text-muted-foreground/90 leading-relaxed">
+        <p className="text-sm lg:text-xl text-muted-foreground/90 leading-relaxed">
           {text}
         </p>
       </div>
-    </div>
+    </MotionDiv>
   );
 }
 
 const RegularPoint = ({ point }: { point: string;}) => {
   return (
-    <div
+    <MotionDiv
+      variants={itemVariants}
       className="group relative bg-linear-to-br
             from-gray-200/[0.08] to-gray-400/[0.03] p-4
             rounded-2xl border border-gray-500/10 hover:shadow-lg
@@ -42,32 +47,40 @@ const RegularPoint = ({ point }: { point: string;}) => {
              rounded-2xl"
       />
 
-      <p className="text-lg lg:text-xl text-muted-foreground/90 leading-relaxed text-left">
+      <p className="text-xl lg:text-xl text-muted-foreground/90 leading-relaxed text-left">
         {point}
       </p>
-    </div>
+    </MotionDiv>
   );
 }
 
-export default function ContentSection({ title, points }: {
-  title: string;
+export default function ContentSection({
+  points,
+}: {
+  // export default function ContentSection({ title, points }: {
   points: string[];
 }) {
   return (
-    <div className="space-y-4">
-        {points.map((point: string, index: number) => {
-          const { isMainPoint, hasEmoji, isEmpty } =
-            parsePoint(point);
-          
-          if (isEmpty) return null;
+    <MotionDiv
+      variants={containerVariants}
+      key={points.join('')}
+      initial="hidden"
+      whileInView="visible"
+      animate="visible"
+      exit="exit"
+      className="space-y-4"
+    >
+      {points.map((point: string, index: number) => {
+        const { isMainPoint, hasEmoji, isEmpty } = parsePoint(point);
 
-          if (hasEmoji || isMainPoint) {
-            return <EmojiPoint key={`point-${index}`} point={point} />;
+        if (isEmpty) return null;
 
-          }
+        if (hasEmoji || isMainPoint) {
+          return <EmojiPoint key={`point-${index}`} point={point} />;
+        }
 
-            return <RegularPoint key={`point-${index}`} point={point} />;
-        })}
-    </div>
+        return <RegularPoint key={`point-${index}`} point={point} />;
+      })}
+    </MotionDiv>
   );
 }

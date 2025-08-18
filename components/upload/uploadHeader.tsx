@@ -1,10 +1,13 @@
 import { Badge } from '@/components/ui/badge';
 import { Sparkles } from 'lucide-react';
+import { MotionDiv } from '../common/motionWrapper';
+import { itemVariants } from '@/constants/motion';
 
 export default function UploadHeader() {
   return (
     <div className="flex flex-col items-center justify-center gap-6 text-center">
-      <div
+      <MotionDiv
+        variants={itemVariants}
         className="relative p-[1px] overflow-hidden rounded-full
        bg-linear-to-r from-rose-200 via-rouse-500 to-rose-800
        animate-gradient-x group"
@@ -18,9 +21,12 @@ export default function UploadHeader() {
             AI-Powered Content Creation
           </p>
         </Badge>
-      </div>
+      </MotionDiv>
 
-      <h1 className="capitalize text-3xl font-bold text-gray-900 sm:text-4xl">
+      <MotionDiv
+        variants={itemVariants}
+        className="capitalize text-3xl font-bold text-gray-900 sm:text-4xl"
+      >
         Start Uploading
         <span className="relative inline-block">
           <span className="relative z-10 px-2">Your PDF&apos;s</span>
@@ -29,11 +35,14 @@ export default function UploadHeader() {
             aria-hidden="true"
           ></span>
         </span>
-      </h1>
+      </MotionDiv>
 
-      <p className="mt-4 text-lg leading-7 text-gray-600">
-        Upload your PDF and let our AI do the magic! ✨
-      </p>
+      <MotionDiv
+        variants={itemVariants}
+        className="mt-4 text-lg leading-7 text-gray-600"
+      >
+        <p>Upload your PDF and let our AI do the magic! ✨</p>
+      </MotionDiv>
     </div>
   );
 }

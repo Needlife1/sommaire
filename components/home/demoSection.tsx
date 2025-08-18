@@ -1,4 +1,40 @@
 import { Pizza } from 'lucide-react';
+import SummaryViewer from '../summaries/summaryViewer';
+import { MotionDiv, MotionH3 } from '../common/motionWrapper';
+
+export const DEMO_SUMMARY = `
+# Quick Overview
+🚀 In-depth Next.js 15 course spanning from core concepts to advanced deployment techniques
+
+# Document Details
+📄 Type: Technical Course
+👥 For: Web Developers & React Engineers
+
+# Why It Matters
+💡 Next.js is becoming the industry standard for React applications, offering superior performance, SEO, and developer experience. This course provides the essential knowledge needed to build modern web applications.
+
+# Main Points
+🥑 Modern application architecture with App Router
+💻 Server and Client Components best practices
+📊 Data fetching patterns and caching strategies
+🛠 Authentication and API route implementation
+
+# Pro Tips
+📂 Organize routes efficiently using route groups
+💡 Use loading.tsx and error.tsx for better UX
+
+# Key Terms to Know
+🥗 Server Components: React components that render on the server for better performance
+🔍 Route Groups: Next.js feature for organizing routes without affecting URL structure
+🎯 Streaming: Technique for progressively rendering UI components
+📦 Suspense: React feature for handling loading states
+
+# Bottom Line
+✨ Master Next.js 15 to build fast, scalable, and SEO-friendly web applications with the latest React features and best practices.
+
+# Final Thoughts
+🔥 This course transforms developers into Next.js experts, enabling them to build production-ready applications with confidence and efficiency.
+`;
 
 export default function DemoSection() {
   return (
@@ -30,21 +66,26 @@ export default function DemoSection() {
           </div>
 
           <div className="text-center mb-16">
-            <h3 className="font-bold text-3xl max-w-2xl mx-auto px-4 sm:px-6">
+            <MotionH3
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="font-bold text-3xl max-w-2xl mx-auto px-4 sm:px-6">
               Watch how Sommaire transforms{' '}
               <span className="bg-gradient-to-r from-rose-500 to-rose-700 bg-clip-text text-transparent">
                 this Next.js course PDF
               </span>{' '}
               into an easy-to-read summary!
-            </h3>
+            </MotionH3>
           </div>
-          <div
+          </div>
+          <MotionDiv initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.5 }}
             className="flex justify-center items-center px-2
               sm:px-4 lg:px-6"
           >
-            {/* {Summary Viewer} */}
-          </div>
-        </div>
+            <SummaryViewer summary={DEMO_SUMMARY} />
+          </MotionDiv>
+        
       </div>
     </section>
   );

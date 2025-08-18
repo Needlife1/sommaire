@@ -1,4 +1,4 @@
-export const plans = [
+export const pricingPlans = [
   {
     name: 'Basic',
     price: 9,
@@ -9,8 +9,14 @@ export const plans = [
       'Email support',
     ],
     id: 'basic',
-    paymentLink: '',
-    priceId: '',
+    paymentLink:
+      process.env.NODE_ENV === 'development'
+        ? 'https://buy.stripe.com/test_aFa3cv1ZBckn4Rs0b83ks00'
+        : '',
+    priceId:
+      process.env.NODE_ENV === 'development'
+        ? 'price_1RsdUlHLUFB4hd6OCJDRLQtC'
+        : '',
   },
   {
     name: 'Pro',
@@ -23,15 +29,13 @@ export const plans = [
       'Markdown Export',
     ],
     id: 'pro',
-    // paymentLink:
-    //   process.env.NODE_ENV === 'development'
-    //     ? 'https://buy.stripe.com/test_bIY3eFcIugYp3YYeV0'
-    //     : 'https://buy.stripe.com/28o00DgLf2P26DeV7',
-    // priceId:
-    //   process.env.NODE_ENV === 'development'
-    //     ? 'price_1qkUfPBPnsISnc828hqeP9Lm'
-    //     : 'price_1QktFBPnsISnc82t18EHibb',
-    paymentLink: '',
-    priceId: '',
+    paymentLink:
+      process.env.NODE_ENV === 'development'
+        ? 'https://buy.stripe.com/test_dRmfZh47JesvabM9LI3ks01'
+        : '',
+    priceId:
+      process.env.NODE_ENV === 'development'
+        ? 'price_1RsdUlHLUFB4hd6Ox27neeST'
+        : '',
   },
 ];

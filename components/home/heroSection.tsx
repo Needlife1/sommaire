@@ -2,15 +2,22 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
+import { MotionDiv, MotionH1, MotionH2, MotionSection, MotionSpan } from '@/components/common/motionWrapper';
+import { buttonVariants, containerVariants, itemVariants } from '@/constants/motion';
+
 
 export default function HeroSection() {
   return (
-    <section
+    <MotionSection
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
       className="flex flex-col relative mx-auto z-0
     items-center justify-center py-16 sm:py-20 lg:pb-28
     transition-all animate-in lg:px-12 max-w-7xl"
     >
-      <div
+      <MotionDiv
+        variants={itemVariants}
         className="relative p-[1px] overflow-hidden rounded-full 
            bg-gradient-to-r from-rose-200 via-rose-500 to-rose-800 animate-gradient-x
           group"
@@ -25,23 +32,32 @@ export default function HeroSection() {
             Powered by AI
           </p>
         </Badge>
-      </div>
+      </MotionDiv>
 
-      <h1 className="py-6 text-center">
+      <MotionH1
+        variants={itemVariants}
+        className="py-6 text-center">
         Transform PDFs into
         <span className="relative inline-block">
-          <span className="relative z-10 px-2">concise</span>
+          <MotionSpan
+            whileHover={buttonVariants}
+            className="relative z-10 px-2">concise</MotionSpan>
           <span
             className="absolute inset-0 bg-rose-200/50 -rotate-2 rounded-lg transform -skew-y-1"
             aria-hidden="true"
           ></span>
         </span>
         summaries
-      </h1>
-      <h2 className="text-center px-4 lg:px-0 lg:max-w-4xl text-gray-600">
+      </MotionH1>
+      <MotionH2
+      variants={itemVariants}
+        className="text-center px-4 lg:px-0 lg:max-w-4xl text-gray-600">
         Get default summaries reel of the document in seconds.
-      </h2>
-      <div>
+      </MotionH2>
+      <MotionDiv
+        variants={itemVariants}
+        whileHover={buttonVariants}
+      >
         <Button
           variant={'link'}
           className="text-white mt-6 text-base
@@ -55,7 +71,7 @@ export default function HeroSection() {
             <ArrowRight className="animate-pluse" />
           </Link>
         </Button>
-      </div>
-    </section>
+      </MotionDiv>
+    </MotionSection>
   );
 }

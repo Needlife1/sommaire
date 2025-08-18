@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import { Source_Sans_3 as FontSans } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/common/header";
-import Footer from "@/components/common/footer";
-import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster } from "sonner";
+import type { Metadata } from 'next';
+import { Source_Sans_3 as FontSans } from 'next/font/google';
+import './globals.css';
+import Header from '@/components/common/header';
+import Footer from '@/components/common/footer';
+import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'sonner';
+import { getSiteUrl } from '@/utils/healpers';
 
 const fontSans = FontSans({
   variable: '--font-sans',
@@ -12,16 +13,28 @@ const fontSans = FontSans({
   weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
+const SITE_URL = getSiteUrl();
+
 export const metadata: Metadata = {
-  title: "Sommaire - AI-Powered PDF Summarization",
-  description: "Save hours of reading time. Transform lengthy PDFs into clear, accurate summaries in seconds with our advanced AI technology.",
+  title: 'Sommaire - AI-Powered PDF Summarization',
+  description:
+    'Save hours of reading time. Transform lengthy PDFs into clear, accurate summaries in seconds with our advanced AI technology.',
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: SITE_URL },
+  openGraph: {
+    images: [
+      // можно относительный путь, т.к. есть metadataBase,
+      // но абсолютный безопаснее:
+      `${SITE_URL}/open-graph-image.png`,
+    ],
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <ClerkProvider>
       <html lang="en">
@@ -31,7 +44,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
-          <Toaster/>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
