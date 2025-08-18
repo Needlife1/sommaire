@@ -84,7 +84,9 @@ export default async function DashboardPage() {
                   You&apos;ve reached the limit of {uploadLimit} uploads on the
                   Basic plan.{' '}
                   <Link
-                    href={{ pathname: '/', hash: 'pricing' }}
+                    href="/#pricing" // ← строкой
+                    prefetch={false} // чтобы не мешал роутер
+                    scroll={false} // якорь оставит контроль скролла браузеру
                     className="text-rose-800 underline font-medium underline-offset-4 inline-flex items-center"
                   >
                     {' '}
