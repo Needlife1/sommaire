@@ -58,6 +58,7 @@ export default function PricingCard({ name, price, description, items, id, payme
             variants={listVariants}
             className={cn("space-y-2 flex justify-center w-full")}>
             <Link
+              target="_blank"
               href={paymentLink}
               className={cn(
                 "w-full rounded-full flex items-center justify-center gap-2 bg-linear-to-r from-rose-800 to-rose-500 hover:from-rose-500 hover:to-rose-800 text-white border-2 py-2",
