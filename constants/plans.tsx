@@ -12,11 +12,11 @@ export const pricingPlans = [
     paymentLink:
       process.env.NODE_ENV === 'development'
         ? 'https://buy.stripe.com/test_aFa3cv1ZBckn4Rs0b83ks00'
-        : '',
+        : 'https://buy.stripe.com/test_aFa3cv1ZBckn4Rs0b83ks00',
     priceId:
       process.env.NODE_ENV === 'development'
         ? 'price_1RsdUlHLUFB4hd6OCJDRLQtC'
-        : '',
+        : 'price_1RsdUlHLUFB4hd6OCJDRLQtC',
   },
   {
     name: 'Pro',
@@ -32,10 +32,10 @@ export const pricingPlans = [
     paymentLink:
       process.env.NODE_ENV === 'development'
         ? 'https://buy.stripe.com/test_dRmfZh47JesvabM9LI3ks01'
-        : '',
+        : 'https://buy.stripe.com/test_dRmfZh47JesvabM9LI3ks01',
     priceId:
       process.env.NODE_ENV === 'development'
         ? 'price_1RsdUlHLUFB4hd6Ox27neeST'
-        : '',
+        : 'price_1RsdUlHLUFB4hd6Ox27neeST',
   },
 ];
